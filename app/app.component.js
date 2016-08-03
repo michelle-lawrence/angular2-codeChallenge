@@ -11,11 +11,49 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('@angular/core');
 var AppComponent = (function () {
     function AppComponent() {
+        this.listingName = "San Francisco";
+        this.amenitiesList = [
+            {
+                icon: 'fa-cutlery',
+                label: 'Nearby Restaurants',
+                quantity: '##'
+            },
+            {
+                icon: 'fa-shopping-basket',
+                label: 'Nearby Groceries',
+                quantity: '##'
+            },
+            {
+                icon: 'fa-university',
+                label: 'Nearby Banks',
+                quantity: '##'
+            },
+            {
+                icon: 'fa-ellipsis-h',
+                label: 'Other Amenities',
+                quantity: '##'
+            }
+        ];
+        this.sidebarList = [
+            {
+                icon: 'fa-cutlery',
+                label: 'Nearby Restaurants'
+            },
+            {
+                icon: 'fa-shopping-basket',
+                label: 'Nearby Groceries'
+            },
+            {
+                icon: 'fa-university',
+                label: 'Nearby Banks'
+            }
+        ];
     }
     AppComponent = __decorate([
         core_1.Component({
             selector: 'my-app',
-            template: '<h1>snt media Code Challenge</h1>'
+            templateUrl: 'app/app.component.html',
+            styleUrls: ['css/styles.css'],
         }), 
         __metadata('design:paramtypes', [])
     ], AppComponent);
