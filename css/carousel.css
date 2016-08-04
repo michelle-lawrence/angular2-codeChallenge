@@ -1,0 +1,36 @@
+h5, p, button {color: #fff;}
+img {
+	margin: 0 auto;
+	max-width: 50%;
+	max-height: 50%;
+	display: block;
+	border: 3px solid #cecece;
+	border-radius: 100px;
+	background-color: #fff;
+}
+h5 {
+	font-weight: bold;
+	color: #fff;
+}
+button {
+	background-color: #4EBF4A;
+	border: none; 
+	font-size: 0.8em;
+	padding: 5px;
+	border-radius: 3px;
+	width: 150px;
+}
+button span {padding: 3px 7px;}
+
+.fa-map-marker {color: #4EBF4A;}
+.fa-home {
+	color:#fff;
+	background-color: #000;
+	border-radius: 15px;
+	padding: 5px;
+	font-size: 1em;
+}
+.carouselFooter{
+	color: #fff;
+	font-weight: normal;
+}

@@ -36,7 +36,7 @@ header {
 	background-color: #000;
 	color: #fff;
 	height: 30px;
-	padding: 10px 5px 3px 5px;
+	padding: 3px 5px;
 }
 .headerTitle:before {
 	content:'';
@@ -58,8 +58,11 @@ footer {
 	display: block;
 	padding-right: 15px;
 }
-.footerInfo i {
-	color: red;
+.footerInfo img {
+	display: inline-block;
+	vertical-align: top;
+	max-width: 35px;
+	max-height: auto;
 }
 
 /******************* Content *****************/
@@ -74,9 +77,8 @@ footer {
 	height: 50%;
 	margin: 15px 0 0 15px;
 	background-color: #595959;
-}
-.carouselContainer:after {
-
+	background-image: url("./images/cloth_texture.png");
+	overflow: hidden;
 }
 .amenities {
 	width: auto;
