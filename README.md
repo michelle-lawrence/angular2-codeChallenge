@@ -23,6 +23,7 @@ Criteria
 
 
 Instructions:
+
 1.)	Using Angular 2, create the module described by this spec sheet:
 http://adobe.ly/24noOTP 
 
@@ -32,6 +33,7 @@ http://adobe.ly/24noOTP
 https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css   
 
 Note: not all icons from design spec can be found in font-awesome, so use a best guess replacement in these cases.
+
 4.)	Match the provided spec as closely as possible. Responsive design not
 mandated, but if you want to show off, feel free.
 
