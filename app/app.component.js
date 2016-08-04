@@ -9,6 +9,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
+require('./rxjs-operators');
 var carousel_container_component_1 = require('./carousel-container.component');
 var AppComponent = (function () {
     function AppComponent() {

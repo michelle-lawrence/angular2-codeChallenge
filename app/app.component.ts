@@ -1,4 +1,5 @@
 import {Component} from '@angular/core';
+import './rxjs-operators';
 import{Angular2Carousel} from './carousel-container.component';
 
 @Component({
