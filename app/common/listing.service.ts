@@ -6,13 +6,14 @@ import { Observable }     from 'rxjs/Observable';
 export class ListingService {
   constructor (private jsonp: Jsonp) {}
 
-  private dataUrl = 'http://prod-joyfulhome-api.synapsys.us/location/amenitiesInLocation/CA/San%20Francisco';  // URL to web API
+  private dataUrl = 'http://prod-joyfulhome-api.synapsys.us/location/amenitiesInLocation/';  // URL to web API
 
   getData (item): Observable<Listing[]> {
 
 
     return this.jsonp.get(this.dataUrl + item)
-                    .map(this.extractData);
+                    .map(this.extractData)
+                    .catch(this.handleError);
   }
   private extractData(res: Response) {
     let body = res.json();

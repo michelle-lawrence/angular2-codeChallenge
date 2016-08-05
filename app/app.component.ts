@@ -27,18 +27,16 @@ export class AppComponent implements OnInit {
   	ngOnInit() { 
   		this.sub = this.route.params.subscribe(params => {
   		let state = params['state'];
-  		console.log(state);
+
   		this.getData(state); 
   		});
   	}
 
-  	getData() {
-    	this.listingService.getData()
+  	getData(item) {
+    	this.listingService.getData(item)
                      .subscribe(
-                       dataList => this.dataList = dataList,
+                       data => this.dataList = data,
                        error =>  this.errorMessage = <any>error);
-
-                       console.log(this.dataList)
   	}
 
   	ngOnDestroy() {

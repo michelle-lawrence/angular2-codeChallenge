@@ -111,15 +111,13 @@ var AppComponent = (function () {
         var _this = this;
         this.sub = this.route.params.subscribe(function (params) {
             var state = params['state'];
-            console.log(state);
             _this.getData(state);
         });
     };
-    AppComponent.prototype.getData = function () {
+    AppComponent.prototype.getData = function (item) {
         var _this = this;
-        this.listingService.getData()
-            .subscribe(function (dataList) { return _this.dataList = dataList; }, function (error) { return _this.errorMessage = error; });
-        console.log(this.dataList);
+        this.listingService.getData(item)
+            .subscribe(function (data) { return _this.dataList = data; }, function (error) { return _this.errorMessage = error; });
     };
     AppComponent.prototype.ngOnDestroy = function () {
         this.sub.unsubscribe();

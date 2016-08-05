@@ -1,5 +1,5 @@
 # angular2-codeChallenge
-snt media Code Challenge
+SNT Media Code Challenge
 
 Requires node v4.x.x and npm 3.x.x or higher
 

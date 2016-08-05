@@ -14,11 +14,12 @@ var Observable_1 = require('rxjs/Observable');
 var ListingService = (function () {
     function ListingService(jsonp) {
         this.jsonp = jsonp;
-        this.dataUrl = 'http://prod-joyfulhome-api.synapsys.us/location/amenitiesInLocation/CA/San%20Francisco'; // URL to web API
+        this.dataUrl = 'http://prod-joyfulhome-api.synapsys.us/location/amenitiesInLocation/'; // URL to web API
     }
     ListingService.prototype.getData = function (item) {
         return this.jsonp.get(this.dataUrl + item)
-            .map(this.extractData);
+            .map(this.extractData)
+            .catch(this.handleError);
     };
     ListingService.prototype.extractData = function (res) {
         var body = res.json();
