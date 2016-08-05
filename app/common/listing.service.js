@@ -12,14 +12,13 @@ var core_1 = require('@angular/core');
 var http_1 = require('@angular/http');
 var Observable_1 = require('rxjs/Observable');
 var ListingService = (function () {
-    function ListingService(http) {
-        this.http = http;
+    function ListingService(jsonp) {
+        this.jsonp = jsonp;
         this.dataUrl = 'http://prod-joyfulhome-api.synapsys.us/location/amenitiesInLocation/CA/San%20Francisco'; // URL to web API
     }
-    ListingService.prototype.getHeroes = function () {
-        return this.http.get(this.dataUrl)
-            .map(this.extractData)
-            .catch(this.handleError);
+    ListingService.prototype.getData = function (item) {
+        return this.jsonp.get(this.dataUrl + item)
+            .map(this.extractData);
     };
     ListingService.prototype.extractData = function (res) {
         var body = res.json();
@@ -35,7 +34,7 @@ var ListingService = (function () {
     };
     ListingService = __decorate([
         core_1.Injectable(), 
-        __metadata('design:paramtypes', [http_1.Http])
+        __metadata('design:paramtypes', [http_1.Jsonp])
     ], ListingService);
     return ListingService;
 }());

@@ -1,14 +1,67 @@
-import {Component} from '@angular/core';
-import './rxjs-operators';
-import{Angular2Carousel} from './carousel-container.component';
+import {Component, OnInit} from '@angular/core';
+import {Angular2Carousel} from './common/carousel-container.component';
+import { ROUTER_DIRECTIVES, Router, ActivatedRoute } from '@angular/router';
+import {Listing} from './common/listing';
+import {ListingService} from './common/listing.service';
+import {JSONP_PROVIDERS} from '@angular/http';
+import './common/rxjs-operators';
 
 @Component({
   selector: 'my-app',
   templateUrl: 'app/app.component.html',
   styleUrls: ['css/styles.css'],
-  directives: [Angular2Carousel], 
+  directives: [ROUTER_DIRECTIVES, Angular2Carousel], 
+  providers: [JSONP_PROVIDERS, ListingService],
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
+  errorMessage: string;
+  dataList: Listing[];
+  mode = 'Observable';
+  private sub: any; 
+
+  	constructor (
+  		private listingService: ListingService,
+  		private route: ActivatedRoute,
+  		private router: Router) {}
+
+  	ngOnInit() { 
+  		this.sub = this.route.params.subscribe(params => {
+  		let state = params['state'];
+  		console.log(state);
+  		this.getData(state); 
+  		});
+  	}
+
+  	getData() {
+    	this.listingService.getData()
+                     .subscribe(
+                       dataList => this.dataList = dataList,
+                       error =>  this.errorMessage = <any>error);
+
+                       console.log(this.dataList)
+  	}
+
+  	ngOnDestroy() {
+  		this.sub.unsubscribe();
+  	}
+
+	onClick(label) {
+		switch (label) {
+			case "Nearby Restaurants":
+				this.contentList = this.restaurantInfo;
+				break;
+			case "Nearby Groceries":
+				this.contentList = this.groceryInfo;
+				break;
+			case "Nearby Banks":
+				this.contentList = this.bankInfo;
+				break;
+			default:
+				break;
+		}
+	}
+
+  	/** TODO: replace hard coded data below with API call */
 	listingName = "San Francisco";
 	amenitiesList = [
 		{
@@ -32,20 +85,8 @@ export class AppComponent {
 			quantity: '75'
 		}
 	]
-	sidebarList = [
-		{
-			icon: 'fa-cutlery',
-			label: 'Nearby Restaurants'
-		},
-		{
-			icon: 'fa-shopping-basket',
-			label: 'Nearby Groceries'
-		},
-		{
-			icon: 'fa-university',
-			label: 'Nearby Banks'
-		}
-	]
+	sidebarList = this.amenitiesList.slice(0, 3);
+
 	restaurantInfo = [
 		{
 			establishment: 'Fish N Good Eats',
@@ -107,19 +148,4 @@ export class AppComponent {
 		}
 	]
 	contentList = this.restaurantInfo;
-	onClick(label) {
-		switch (label) {
-			case "Nearby Restaurants":
-				this.contentList = this.restaurantInfo;
-				break;
-			case "Nearby Groceries":
-				this.contentList = this.groceryInfo;
-				break;
-			case "Nearby Banks":
-				this.contentList = this.bankInfo;
-				break;
-			default:
-				break;
-		}
-	}
 }

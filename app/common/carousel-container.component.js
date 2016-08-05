@@ -18,7 +18,7 @@ var Angular2Carousel = (function () {
     Angular2Carousel = __decorate([
         core_1.Component({
             selector: 'carousel-container',
-            templateUrl: 'app/carousel-container.html',
+            templateUrl: 'app/common/carousel-container.html',
             styleUrls: ['css/carousel.css'],
             directives: [slide_component_1.Slide, carousel_component_1.Carousel, common_1.CORE_DIRECTIVES, common_1.FORM_DIRECTIVES],
             inputs: ['slides', 'listing'],

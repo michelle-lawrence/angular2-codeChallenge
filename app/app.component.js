@@ -9,10 +9,18 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
-require('./rxjs-operators');
-var carousel_container_component_1 = require('./carousel-container.component');
+var carousel_container_component_1 = require('./common/carousel-container.component');
+var router_1 = require('@angular/router');
+var listing_service_1 = require('./common/listing.service');
+var http_1 = require('@angular/http');
+require('./common/rxjs-operators');
 var AppComponent = (function () {
-    function AppComponent() {
+    function AppComponent(listingService, route, router) {
+        this.listingService = listingService;
+        this.route = route;
+        this.router = router;
+        this.mode = 'Observable';
+        /** TODO: replace hard coded data below with API call */
         this.listingName = "San Francisco";
         this.amenitiesList = [
             {
@@ -36,20 +44,7 @@ var AppComponent = (function () {
                 quantity: '75'
             }
         ];
-        this.sidebarList = [
-            {
-                icon: 'fa-cutlery',
-                label: 'Nearby Restaurants'
-            },
-            {
-                icon: 'fa-shopping-basket',
-                label: 'Nearby Groceries'
-            },
-            {
-                icon: 'fa-university',
-                label: 'Nearby Banks'
-            }
-        ];
+        this.sidebarList = this.amenitiesList.slice(0, 3);
         this.restaurantInfo = [
             {
                 establishment: 'Fish N Good Eats',
@@ -112,6 +107,23 @@ var AppComponent = (function () {
         ];
         this.contentList = this.restaurantInfo;
     }
+    AppComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        this.sub = this.route.params.subscribe(function (params) {
+            var state = params['state'];
+            console.log(state);
+            _this.getData(state);
+        });
+    };
+    AppComponent.prototype.getData = function () {
+        var _this = this;
+        this.listingService.getData()
+            .subscribe(function (dataList) { return _this.dataList = dataList; }, function (error) { return _this.errorMessage = error; });
+        console.log(this.dataList);
+    };
+    AppComponent.prototype.ngOnDestroy = function () {
+        this.sub.unsubscribe();
+    };
     AppComponent.prototype.onClick = function (label) {
         switch (label) {
             case "Nearby Restaurants":
@@ -132,9 +144,10 @@ var AppComponent = (function () {
             selector: 'my-app',
             templateUrl: 'app/app.component.html',
             styleUrls: ['css/styles.css'],
-            directives: [carousel_container_component_1.Angular2Carousel],
+            directives: [router_1.ROUTER_DIRECTIVES, carousel_container_component_1.Angular2Carousel],
+            providers: [http_1.JSONP_PROVIDERS, listing_service_1.ListingService],
         }), 
-        __metadata('design:paramtypes', [])
+        __metadata('design:paramtypes', [listing_service_1.ListingService, router_1.ActivatedRoute, router_1.Router])
     ], AppComponent);
     return AppComponent;
 }());
